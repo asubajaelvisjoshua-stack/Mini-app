@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0f1419;
+      color: #ffffff;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
+    .card {
+      background: #1e2732;
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    button {
+      background-color: #2aabee;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Telegram Mini App</h2>
+  <div class="card">
+    <p id="user-greeting">Loading user data...</p>
+    <button onclick="showAlert()">Test Mini App</button>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+      document.getElementById('user-greeting').innerText = `Hello, ${tg.initDataUnsafe.user.first_name}!`;
+    } else {
+      document.getElementById('user-greeting').innerText = "Running outside Telegram mode.";
+    }
+
+    function showAlert() {
+      tg.showAlert("Your Mini App is working inside Telegram!");
+    }
+  </script>
+</body>
+</html>
